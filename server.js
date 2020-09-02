@@ -56,19 +56,24 @@ app.post("/api/shorturl/new", (req, res) => {
     } else {
       let findResult = result;
       
+      if (findResult == []){
+        //******* save
+          let ffc = new Url({ url: postUrl, place: placeNumber });
+
+            ffc.save((err, result) => {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json(result);
+              }
+            });
+        //*******
+      }else{
+       res.json({original_url : result[0].url ,  short_url : result[0].place}) 
+      }
     }
   });
-  //******* save
-  //   let ffc = new Url({ url: postUrl, place: placeNumber });
-
-  //   ffc.save((err, result) => {
-  //     if (err) {
-  //       res.json(err);
-  //     } else {
-  //       res.json(result);
-  //     }
-  //   });
-  //*******
+  
 });
 
 app.listen(port, function() {
