@@ -38,13 +38,15 @@ app.get("/api/hello", function(req, res) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post("/api/shorturl/new", (req, res) => {
-  var postUrl = req.body.url;
-
-  const urlSchema = new mongoose.Schema({
+ const urlSchema = new mongoose.Schema({
     url: String,
     place: Number
   });
+
+app.post("/api/shorturl/new", (req, res) => {
+  var postUrl = req.body.url;
+
+ 
 
   const Url = mongoose.model("Url", urlSchema);
 
@@ -52,21 +54,21 @@ app.post("/api/shorturl/new", (req, res) => {
 
   Url.find({ url: postUrl }, (err, result) => {
     if (err) {
-      res.json({error : "Url not found"});
+      res.json(err);
     } else {
-      res.json({hello_babay: result});
+      res.json({hellobabay: result});
     }
   });
   //******* save
-  // let ffc = new Url({ url: postUrl, place: placeNumber });
+//   let ffc = new Url({ url: postUrl, place: placeNumber });
 
-  // ffc.save((err, result) => {
-  //   if (err) {
-  //     res.json(err);
-  //   } else {
-  //     res.json(result);
-  //   }
-  // });
+//   ffc.save((err, result) => {
+//     if (err) {
+//       res.json(err);
+//     } else {
+//       res.json(result);
+//     }
+//   });
   //*******
 });
 
