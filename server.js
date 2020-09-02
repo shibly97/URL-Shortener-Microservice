@@ -50,15 +50,24 @@ app.post("/api/shorturl/new", (req, res) => {
 
   let placeNumber = 1;
 
-  let ffc = new Url({ url: postUrl, place: placeNumber });
-
-  ffc.save((err, result) => {
+  Url.find({ url: postUrl }, (err, result) => {
     if (err) {
-      res.json(err);
+      res.json({error : "Url not found"});
     } else {
-      res.json(result);
+      res.json({hello_babay: result});
     }
   });
+  //******* save
+  // let ffc = new Url({ url: postUrl, place: placeNumber });
+
+  // ffc.save((err, result) => {
+  //   if (err) {
+  //     res.json(err);
+  //   } else {
+  //     res.json(result);
+  //   }
+  // });
+  //*******
 });
 
 app.listen(port, function() {
