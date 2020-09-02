@@ -38,15 +38,13 @@ app.get("/api/hello", function(req, res) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
- const urlSchema = new mongoose.Schema({
-    url: String,
-    place: Number
-  });
+const urlSchema = new mongoose.Schema({
+  url: String,
+  place: Number
+});
 
 app.post("/api/shorturl/new", (req, res) => {
   var postUrl = req.body.url;
-
- 
 
   const Url = mongoose.model("Url", urlSchema);
 
@@ -56,19 +54,20 @@ app.post("/api/shorturl/new", (req, res) => {
     if (err) {
       res.json(err);
     } else {
-      res.json({hellobabay: result});
+      let findResult = result;
+      
     }
   });
   //******* save
-//   let ffc = new Url({ url: postUrl, place: placeNumber });
+  //   let ffc = new Url({ url: postUrl, place: placeNumber });
 
-//   ffc.save((err, result) => {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(result);
-//     }
-//   });
+  //   ffc.save((err, result) => {
+  //     if (err) {
+  //       res.json(err);
+  //     } else {
+  //       res.json(result);
+  //     }
+  //   });
   //*******
 });
 
