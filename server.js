@@ -14,7 +14,7 @@ var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
 // mongoose.connect(process.env.DB_URI);
-
+mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true})
 
 app.use(cors());
 
@@ -37,6 +37,11 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 app.post('/api/shorturl/new',(req,res)=>{
   var url = req.body.url 
+  
+  const urlSchema = new mongoose.Schema({
+      url : String,
+      place : Number
+  })
   
   
 })
