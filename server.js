@@ -3,6 +3,7 @@
 var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
 
 var cors = require('cors');
 
@@ -31,6 +32,9 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.post('/api/shorturl/new',(req,res)=>{
+  console.log(req.body)
+})
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
