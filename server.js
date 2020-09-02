@@ -15,6 +15,7 @@ var port = process.env.PORT || 3000;
 /** this project needs a db !! **/ 
 // mongoose.connect(process.env.DB_URI);
 
+
 app.use(cors());
 
 /** this project needs to parse POST bodies **/
@@ -32,8 +33,12 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.use(bodyParser.urlencoded({extended:false}))
+
 app.post('/api/shorturl/new',(req,res)=>{
-  console.log(req.body)
+  var url = req.body.url 
+  
+  
 })
 
 app.listen(port, function () {
