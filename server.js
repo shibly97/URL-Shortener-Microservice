@@ -56,13 +56,14 @@ app.post("/api/shorturl/new", (req, res) => {
     } else {
       if (mainResult == []) {
         //******* save
-        Url.findOne({})
-          .sort({ place: "desc" })
-          .exec((err, placeResult) => {
-            if (placeResult.place >= 1) {
-              placeNumber = placeResult.place + 1;
-            }
-          });
+        // ***** save
+        // Url.findOne({})
+        //   .sort({ place: "desc" })
+        //   .exec((err, placeResult) => {
+        //     if (placeResult.place >= 1) {
+        //       placeNumber = placeResult.place + 1;
+        //     }
+        //   });
 
         let ffc = new Url({ url: postUrl, place: placeNumber });
 
