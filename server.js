@@ -64,10 +64,18 @@ app.post("/api/shorturl/new", (req, res) => {
         .exec((err, placeResult) => {
           if (placeResult.place >= 1) {
             placeNumber = placeResult.place + 1;
-            
           }
+          
+          let ffc = new Url({ url: postUrl, place: placeNumber });
+
+              ffc.save((err, result) => {
+                if (err) {
+                  res.json(err);
+                } else {
+                  res.json(result);
+                }
+              });
         })
-        
       }
       }   
     //   else{ 
@@ -98,15 +106,7 @@ app.listen(port, function() {
 //       //     }
 //       //   });
 
-//               let ffc = new Url({ url: postUrl, place: placeNumber });
-
-//               ffc.save((err, result) => {
-//                 if (err) {
-//                   res.json(err);
-//                 } else {
-//                   res.json(result);
-//                 }
-//               });
+//              
 //       //*******
 //       }
 //       else {
