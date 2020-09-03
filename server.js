@@ -48,10 +48,18 @@ const Url = mongoose.model("Url", urlSchema);
 app.post("/api/shorturl/new", (req, res) => {
   var postUrl = req.body.url;
   let placeNumber = 1;
+  
+  var urlregex = "/(http(s)?://.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/"
+    
+  if(!postUrl.match(urlregex)){
+    return res.json({error: "invalid"}) 
+  }
 
   Url.find({ url: postUrl }, (err, result) => {
     // res.json(result)
     // res.json({outif : result})
+    
+    
     if (err) {
      res.json(err)
     }else{
