@@ -59,7 +59,16 @@ app.post("/api/shorturl/new", (req, res) => {
         res.json({ original_url: result[0].url, short_url: result[0].place })
       }
       else{
-        res.json({error: "item not in database"})
+        Url.findOne({})
+        .sort({ place: "desc" })
+        .exec((err, placeResult) => {
+          if (placeResult.place >= 1) {
+            placeNumber = placeResult.place + 1;
+            
+          }
+        })
+        await res.json(placeNumber)
+        
       }
       }   
     //   else{
