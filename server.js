@@ -67,13 +67,12 @@ app.post("/api/shorturl/new", (req, res) => {
             
           }
         })
-        await res.json(placeNumber)
         
       }
       }   
-    //   else{
+    //   else{ 
     //       ;}
-    //   // res.json(result)
+    //   // res.json(result)  
     //   // console.log(err)  
     // }  
   });  
