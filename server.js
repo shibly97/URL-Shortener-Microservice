@@ -101,7 +101,7 @@ app.get("/api/shorturl/:input", (req, res) => {
     if (err) {
       res.json(err);
     } else {
-      res.redirect(result.input)
+      res.redirect(result.url)
     }
   });
 });
@@ -109,31 +109,3 @@ app.get("/api/shorturl/:input", (req, res) => {
 app.listen(port, function() {
   console.log("Node.js listening ...");
 });
-
-//   Url.find({ url: postUrl }, (err, mainResult) => {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       // res.send(mainResult);
-//       if (res.json(mainResult) == []) {
-//       //******* save
-//       // ***** save
-//       // Url.findOne({})
-//       //   .sort({ place: "desc" })
-//       //   .exec((err, placeResult) => {
-//       //     if (placeResult.place >= 1) {
-//       //       placeNumber = placeResult.place + 1;
-//       //     }
-//       //   });
-
-//
-//       //*******
-//       }
-//       else {
-//         res.json({
-//           original_url: mainResult[0].url,
-//           short_url: mainResult[0].place
-//         });
-//       }
-//     }
-// });
