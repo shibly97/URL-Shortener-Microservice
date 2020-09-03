@@ -55,13 +55,18 @@ app.post("/api/shorturl/new", (req, res) => {
     if (err) {
      res.json(err)
     }else{
-      res.json(typeof([]))
+      if(result.length != 0){
+        res.json({ original_url: result[0].url, short_url: result[0].place })
+      }
+      else{
+        res.json({error: "item not in database"})
+      }
       }   
     //   else{
-    //       res.json({ original_url: result[0].url, short_url: result[0].place });}
+    //       ;}
     //   // res.json(result)
     //   // console.log(err)  
-    // } 
+    // }  
   });  
 });
 
