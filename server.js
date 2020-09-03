@@ -48,50 +48,50 @@ const Url = mongoose.model("Url", urlSchema);
 app.post("/api/shorturl/new", (req, res) => {
   var postUrl = req.body.url;
   let placeNumber = 1;
-  
-  var urlregex = "/(http(s)?://.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/"
-    
-  if(!postUrl.match(urlregex)){
-    return res.json({error: "invalid"}) 
+
+  var urlRegex = new RegExp(
+    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+  );
+
+  if (!urlRegex.test(postUrl)) {
+    return res.json({ error: "invalid" });
   }
 
   Url.find({ url: postUrl }, (err, result) => {
     // res.json(result)
     // res.json({outif : result})
-    
-    
-    if (err) {
-     res.json(err)
-    }else{
-      if(result.length != 0){
-        res.json({ original_url: result[0].url, short_url: result[0].place })
-      }
-      else{
-        Url.findOne({})
-        .sort({ place: "desc" })
-        .exec((err, placeResult) => {
-          if (placeResult.place >= 1) {
-            placeNumber = placeResult.place + 1;
-          }
-          
-          let ffc = new Url({ url: postUrl, place: placeNumber });
 
-              ffc.save((err, result) => {
-                if (err) {
-                  res.json(err);
-                } else {
-                  res.json(result);
-                }
-              });
-        })
+    if (err) {
+      res.json(err);
+    } else {
+      if (result.length != 0) {
+        res.json({ original_url: result[0].url, short_url: result[0].place });
+      } else {
+        Url.findOne({})
+          .sort({ place: "desc" })
+          .exec((err, placeResult) => {
+            if (placeResult.place >= 1) {
+              placeNumber = placeResult.place + 1;
+            }
+
+            let ffc = new Url({ url: postUrl, place: placeNumber });
+
+            ffc.save((err, result) => {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json(result);
+              }
+            });
+          });
       }
-      }   
-    //   else{ 
+    }
+    //   else{
     //       ;}
-    //   // res.json(result)  
-    //   // console.log(err)  
-    // }  
-  });  
+    //   // res.json(result)
+    //   // console.log(err)
+    // }
+  });
 });
 
 app.listen(port, function() {
@@ -114,7 +114,7 @@ app.listen(port, function() {
 //       //     }
 //       //   });
 
-//              
+//
 //       //*******
 //       }
 //       else {
