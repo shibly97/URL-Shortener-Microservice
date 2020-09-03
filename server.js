@@ -43,51 +43,52 @@ const urlSchema = new mongoose.Schema({
   place: Number
 });
 
+const Url = mongoose.model("Url", urlSchema);
+
 app.post("/api/shorturl/new", (req, res) => {
   var postUrl = req.body.url;
-
-  const Url = mongoose.model("Url", urlSchema);
-
   let placeNumber = 1;
-
-  Url.find({ url: postUrl }, (err, mainResult) => {
-    if (err) {
-      res.json(err);
-    } else {
-      // res.send(mainResult);
-      if (mainResult == []) {
-      //******* save
-      // ***** save
-      // Url.findOne({})
-      //   .sort({ place: "desc" })
-      //   .exec((err, placeResult) => {
-      //     if (placeResult.place >= 1) {
-      //       placeNumber = placeResult.place + 1;
-      //     }
-      //   });
-
-      //         let ffc = new Url({ url: postUrl, place: placeNumber });
-
-      //         ffc.save((err, result) => {
-      //           if (err) {
-      //             res.json(err);
-      //           } else {
-      //             res.json(result);
-      //           }
-      //         });
-      res.json(mainResult);
-      //*******
-      }
-      // else {
-      //   res.json({
-      //     original_url: mainResult[0].url,
-      //     short_url: mainResult[0].place
-      //   });
-      // }
-    }
-  });
+  
+  
 });
 
 app.listen(port, function() {
   console.log("Node.js listening ...");
 });
+
+
+//   Url.find({ url: postUrl }, (err, mainResult) => {
+//     if (err) {
+//       res.json(err);
+//     } else {
+//       // res.send(mainResult);
+//       if (res.json(mainResult) == []) {
+//       //******* save
+//       // ***** save
+//       // Url.findOne({})
+//       //   .sort({ place: "desc" })
+//       //   .exec((err, placeResult) => {
+//       //     if (placeResult.place >= 1) {
+//       //       placeNumber = placeResult.place + 1;
+//       //     }
+//       //   });
+
+//               let ffc = new Url({ url: postUrl, place: placeNumber });
+
+//               ffc.save((err, result) => {
+//                 if (err) {
+//                   res.json(err);
+//                 } else {
+//                   res.json(result);
+//                 }
+//               });
+//       //*******
+//       }
+//       else {
+//         res.json({
+//           original_url: mainResult[0].url,
+//           short_url: mainResult[0].place
+//         });
+//       }
+//     }
+  // });
