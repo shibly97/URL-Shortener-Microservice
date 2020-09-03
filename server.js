@@ -48,14 +48,20 @@ const Url = mongoose.model("Url", urlSchema);
 app.post("/api/shorturl/new", (req, res) => {
   var postUrl = req.body.url;
   let placeNumber = 1;
-  
-  Url.find({url : postUrl})
+
+  Url.find({ url: postUrl }, (err, result) => {
+    if (!err && result != []) {
+      res.json({ original_url: result[0].url, short_url: result[0].place });
+    }else{
+      res.json(result)
+      console.log(err) 
+    }
+  }); 
 });
 
 app.listen(port, function() {
   console.log("Node.js listening ...");
 });
-
 
 //   Url.find({ url: postUrl }, (err, mainResult) => {
 //     if (err) {
@@ -91,4 +97,4 @@ app.listen(port, function() {
 //         });
 //       }
 //     }
-  // });
+// });
