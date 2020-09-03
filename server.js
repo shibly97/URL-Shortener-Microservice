@@ -49,7 +49,7 @@ app.post("/api/shorturl/new", (req, res) => {
   var postUrl = req.body.url;
   let placeNumber = 1;
   
-  
+  Url.find({url : postUrl})
 });
 
 app.listen(port, function() {
