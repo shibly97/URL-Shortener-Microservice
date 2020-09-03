@@ -94,11 +94,17 @@ app.post("/api/shorturl/new", (req, res) => {
   });
 });
 
-app.get('/api/horturl/:input',(req,res)=>{
-  var input = req.param.input
+app.get("/api/shorturl/:input", (req, res) => {
+  var input = parseInt(req.params.input);
   
-  Url.findOne({place:input},(err,result))
-})
+  Url.findOne({ place: input }, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.redirect(result.input)
+    }
+  });
+});
 
 app.listen(port, function() {
   console.log("Node.js listening ...");
