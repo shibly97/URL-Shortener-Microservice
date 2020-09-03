@@ -51,19 +51,18 @@ app.post("/api/shorturl/new", (req, res) => {
 
   Url.find({ url: postUrl }, (err, result) => {
     // res.json(result)
-    res.json({outif : result})
-    // if (err) {
-    //  res.json(err)
-    // }else{
-      if(result ){
-          console.log(result) 
+    // res.json({outif : result})
+    if (err) {
+     res.json(err)
+    }else{
+      res.json(typeof([]))
       }   
     //   else{
     //       res.json({ original_url: result[0].url, short_url: result[0].place });}
     //   // res.json(result)
     //   // console.log(err)  
     // } 
-  }); 
+  });  
 });
 
 app.listen(port, function() {
