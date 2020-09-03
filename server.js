@@ -54,33 +54,36 @@ app.post("/api/shorturl/new", (req, res) => {
     if (err) {
       res.json(err);
     } else {
+      // res.send(mainResult);
       if (mainResult == []) {
-        //******* save
-        // ***** save
-        // Url.findOne({})
-        //   .sort({ place: "desc" })
-        //   .exec((err, placeResult) => {
-        //     if (placeResult.place >= 1) {
-        //       placeNumber = placeResult.place + 1;
-        //     }
-        //   });
+      //******* save
+      // ***** save
+      // Url.findOne({})
+      //   .sort({ place: "desc" })
+      //   .exec((err, placeResult) => {
+      //     if (placeResult.place >= 1) {
+      //       placeNumber = placeResult.place + 1;
+      //     }
+      //   });
 
-        let ffc = new Url({ url: postUrl, place: placeNumber });
+      //         let ffc = new Url({ url: postUrl, place: placeNumber });
 
-        ffc.save((err, result) => {
-          if (err) {
-            res.json(err);
-          } else {
-            res.json(result);
-          }
-        });
-        //*******
-      } else {
-        res.json({
-          original_url: mainResult[0].url,
-          short_url: mainResult[0].place
-        });
+      //         ffc.save((err, result) => {
+      //           if (err) {
+      //             res.json(err);
+      //           } else {
+      //             res.json(result);
+      //           }
+      //         });
+      res.json(mainResult);
+      //*******
       }
+      // else {
+      //   res.json({
+      //     original_url: mainResult[0].url,
+      //     short_url: mainResult[0].place
+      //   });
+      // }
     }
   });
 });
