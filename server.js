@@ -94,6 +94,12 @@ app.post("/api/shorturl/new", (req, res) => {
   });
 });
 
+app.get('/api/horturl/:input',(req,res)=>{
+  var input = req.param.input
+  
+  Url.findOne({place:input},(err,result))
+})
+
 app.listen(port, function() {
   console.log("Node.js listening ...");
 });
