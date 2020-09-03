@@ -50,12 +50,17 @@ app.post("/api/shorturl/new", (req, res) => {
   let placeNumber = 1;
 
   Url.find({ url: postUrl }, (err, result) => {
-    if (!err && result != []) {
-      res.json({ original_url: result[0].url, short_url: result[0].place });
+    if (err) {
+     res.json(err)
     }else{
-      res.json(result)
-      console.log(err) 
-    }
+      if (result ==[]){
+           console.log()
+      }  
+      else{
+          res.json({ original_url: result[0].url, short_url: result[0].place });}
+      // res.json(result)
+      // console.log(err)  
+    } 
   }); 
 });
 
